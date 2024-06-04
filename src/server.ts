@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv'
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './config/swagger';
 import morgan from 'morgan';
 import { corsConfig } from './config/cors';
 import { connectDB } from './config/db';
@@ -24,5 +26,7 @@ app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.use('/api/projects', projectRoutes)
 
+// Docs
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 export default app
